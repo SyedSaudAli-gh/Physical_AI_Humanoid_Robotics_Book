@@ -1,0 +1,201 @@
+openapi: 3.0.0
+info:
+  title: RAG Chatbot API
+  description: API for RAG-based chatbot functionality
+  version: 1.0.0
+servers:
+  - url: https://api.physical-ai-humanoid-book.com
+    description: Production server
+  - url: http://localhost:8000
+    description: Development server
+paths:
+  /chat/query:
+    post:
+      summary: Submit a query to the RAG chatbot
+      description: Process user query against book content and return AI response
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - query
+              properties:
+                query:
+                  type: string
+                  description: User's question or query
+                context:
+                  type: string
+                  description: Additional context about current content
+                userId:
+                  type: string
+                  description: User identifier (optional for anonymous)
+                moduleId:
+                  type: string
+                  description: Current module identifier
+                chapterId:
+                  type: string
+                  description: Current chapter identifier
+      responses:
+        '200':
+          description: Query processed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: string
+                    description: AI-generated response
+                  sources:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        title:
+                          type: string
+                        content:
+                          type: string
+                        relevance:
+                          type: number
+                  confidence:
+                    type: number
+                    description: Confidence score (0-1)
+                  sessionId:
+                    type: string
+                    description: Session identifier for conversation history
+        '400':
+          description: Invalid query
+        '500':
+          description: Processing error
+  /chat/selection:
+    post:
+      summary: Query about selected text
+      description: Process query about specific selected text from book content
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - selectedText
+                - query
+              properties:
+                selectedText:
+                  type: string
+                  description: Text that was selected by user
+                query:
+                  type: string
+                  description: User's question about the selected text
+                userId:
+                  type: string
+                  description: User identifier (optional for anonymous)
+      responses:
+        '200':
+          description: Query processed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: string
+                    description: AI-generated response explaining the selected text
+                  explanation:
+                    type: string
+                    description: Detailed explanation of the selected content
+                  relatedContent:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        title:
+                          type: string
+                        url:
+                          type: string
+        '400':
+          description: Invalid input
+        '500':
+          description: Processing error
+  /chat/history:
+    get:
+      summary: Get chat history
+      description: Retrieve conversation history for authenticated user
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+          description: Number of recent conversations to return
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            default: 0
+          description: Offset for pagination
+      responses:
+        '200':
+          description: Chat history retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  history:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ChatSession'
+                  total:
+                    type: integer
+        '401':
+          description: Unauthorized
+components:
+  schemas:
+    ChatSession:
+      type: object
+      properties:
+        id:
+          type: string
+        query:
+          type: string
+        response:
+          type: string
+        context:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+        feedback:
+          type: object
+          properties:
+            rating:
+              type: integer
+              minimum: 1
+              maximum: 5
+            comment:
+              type: string
+    ContentReference:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        content:
+          type: string
+        relevance:
+          type: number
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

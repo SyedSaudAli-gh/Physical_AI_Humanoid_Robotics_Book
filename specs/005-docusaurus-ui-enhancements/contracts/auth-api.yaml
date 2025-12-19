@@ -1,0 +1,169 @@
+# Authentication API Contract
+
+## Overview
+This document defines the API contract for the Better-Auth integration in the Docusaurus UI Enhancement project.
+
+## Base URL
+The authentication endpoints will be available at `/api/auth/*` relative to the site root.
+
+## Authentication Endpoints
+
+### POST /api/auth/signup
+Register a new user with background information.
+
+**Request**:
+```json
+{
+  "email": "user@example.com",
+  "name": "John Doe",
+  "password": "securePassword123",
+  "software_background": "Experience with Python, JavaScript, and AI frameworks",
+  "hardware_background": "Experience with Arduino, Raspberry Pi, and sensors"
+}
+```
+
+**Response (Success)**:
+```json
+{
+  "status": "success",
+  "user": {
+    "id": "user_123456789",
+    "email": "user@example.com",
+    "name": "John Doe",
+    "software_background": "Experience with Python, JavaScript, and AI frameworks",
+    "hardware_background": "Experience with Arduino, Raspberry Pi, and sensors",
+    "created_at": "2025-12-18T10:30:00Z"
+  },
+  "session": {
+    "token": "jwt_token_here",
+    "expires_at": "2025-12-19T10:30:00Z"
+  }
+}
+```
+
+**Response (Error)**:
+```json
+{
+  "status": "error",
+  "message": "Validation error or user already exists"
+}
+```
+
+### POST /api/auth/signin
+Authenticate an existing user.
+
+**Request**:
+```json
+{
+  "email": "user@example.com",
+  "password": "securePassword123"
+}
+```
+
+**Response (Success)**:
+```json
+{
+  "status": "success",
+  "user": {
+    "id": "user_123456789",
+    "email": "user@example.com",
+    "name": "John Doe",
+    "language_preference": "en"
+  },
+  "session": {
+    "token": "jwt_token_here",
+    "expires_at": "2025-12-19T10:30:00Z"
+  }
+}
+```
+
+### POST /api/auth/signout
+Log out the current user.
+
+**Request**: (No body required)
+**Headers**: Authorization: Bearer {jwt_token}
+
+**Response**:
+```json
+{
+  "status": "success",
+  "message": "Successfully signed out"
+}
+```
+
+### GET /api/auth/session
+Get current session information.
+
+**Headers**: Authorization: Bearer {jwt_token}
+
+**Response (Success)**:
+```json
+{
+  "status": "success",
+  "user": {
+    "id": "user_123456789",
+    "email": "user@example.com",
+    "name": "John Doe",
+    "language_preference": "en"
+  },
+  "session": {
+    "expires_at": "2025-12-19T10:30:00Z"
+  }
+}
+```
+
+### PUT /api/auth/profile
+Update user profile information.
+
+**Headers**: Authorization: Bearer {jwt_token}
+
+**Request**:
+```json
+{
+  "name": "John Smith",
+  "language_preference": "ur"
+}
+```
+
+**Response (Success)**:
+```json
+{
+  "status": "success",
+  "user": {
+    "id": "user_123456789",
+    "email": "user@example.com",
+    "name": "John Smith",
+    "language_preference": "ur"
+  }
+}
+```
+
+## Language Switching Endpoints
+
+### GET /api/lang/{lang_code}
+Get content in specified language.
+
+**Parameters**:
+- lang_code: Two-letter language code (en, ur)
+
+**Response**:
+- Returns content in the requested language
+- Redirects if language not supported
+
+## Error Handling
+
+All API endpoints follow this error response format:
+```json
+{
+  "status": "error",
+  "message": "Descriptive error message",
+  "code": "ERROR_CODE"
+}
+```
+
+Common error codes:
+- `VALIDATION_ERROR`: Request data failed validation
+- `AUTHENTICATION_ERROR`: User is not authenticated
+- `AUTHORIZATION_ERROR`: User is not authorized for this action
+- `RESOURCE_NOT_FOUND`: Requested resource does not exist
+- `INTERNAL_ERROR`: Server-side error occurred

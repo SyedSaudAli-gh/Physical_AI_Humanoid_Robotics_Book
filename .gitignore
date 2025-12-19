@@ -1,0 +1,100 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+*.egg-info/
+.venv/
+venv/
+env/
+ENV/
+.Python
+
+# Build outputs
+build/
+dist/
+*.min.js
+*.min.css
+*.bundle.js
+coverage/
+.nyc_output/
+.pytest_cache/
+
+# Environment variables
+.env*
+!.env.example
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Thumbs.db:encryptable
+
+# Docusaurus
+.docusaurus/
+.temp/
+.cache/
+
+# Python
+*.pyc
+*.pyo
+*.pyd
+.Python
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+nox/
+.hypothesis/
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Translations
+*.mo
+*.pot
+
+# Testing
+.pytest_cache/
+.coverage*
+htmlcov/
+.cov/
+coverage.xml
+*.gcda
+*.gcno
+
+# Local development
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Sensitive files
+config/
+secrets/
+creds/
+*.key
+*.pem
+*.crt
+*.cert

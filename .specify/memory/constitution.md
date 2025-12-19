@@ -1,55 +1,60 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!-- SYNC IMPACT REPORT
+Version change: 1.0.0 → 1.0.0 (initial creation)
+Modified principles: none (new document)
+Added sections: All sections (initial creation)
+Removed sections: none
+Templates requiring updates: ✅ updated / ⚠ pending
+Follow-up TODOs: none
+-->
+
+# Book on Physical AI & Humanoid Robotics Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### Technical Accuracy and Verification
+All technical descriptions and implementations must be accurate and verified through tool documentation and best practices. No assumptions should be made without external verification.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### Educational Clarity
+Content must be clear for students with computer science and AI backgrounds, focusing on practical application rather than theoretical concepts alone.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### Reproducibility and Documentation
+All code, simulations, and deployments must be reproducible with documented steps that are traceable and verifiable. Every process should be replicable by others.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### Integration Rigor
+Integration between components must be rigorous and seamless, especially for the RAG chatbot and bonus features. All interfaces should be well-defined and tested.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### Innovation Through Reusability
+Focus on innovation through reusable intelligence via subagents and agent skills, promoting modular and extensible design patterns.
 
-### [PRINCIPLE_6_NAME]
+### Minimal Viable Implementation
+Prefer the smallest viable implementation that meets requirements without unnecessary refactoring of unrelated code. Maintain focus on core objectives.
 
+## Technical Standards and Constraints
 
-[PRINCIPLE__DESCRIPTION]
+### Core Technology Stack
+Use the specified technology stack: Docusaurus for content organization, GitHub Pages for deployment, OpenAI Agents/ChatKit SDKs, FastAPI, Neon Serverless Postgres, and Qdrant Cloud Free Tier for the RAG chatbot functionality.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+### Deployment Requirements
+Deploy the book to GitHub Pages with an embedded RAG chatbot that can accurately answer content queries. All features must be fully functional in the deployed environment.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### Code Quality Standards
+All code and documentation must be original and plagiarism-free. Use Spec-Kit Plus and Claude Code for development processes. Follow established code quality, testing, performance, and security principles.
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+## Development Workflow and Quality Assurance
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+### Verification Process
+Prioritize and use MCP tools and CLI commands for all information gathering and task execution. Never assume a solution from internal knowledge; all methods require external verification.
+
+### Change Management
+Produce the smallest viable diffs; do not refactor unrelated code. Cite existing code with references and propose new code in fenced blocks. Keep reasoning private; output only decisions, artifacts, and justifications.
+
+### Human Feedback Integration
+Treat the user as a specialized tool for clarification and decision-making when encountering ambiguous requirements, unforeseen dependencies, or architectural uncertainty. Ask targeted questions before proceeding with uncertain implementations.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This constitution governs all development activities for the Physical AI & Humanoid Robotics book project. All team members must adhere to these principles and standards. Changes to this constitution require explicit approval and documentation of the rationale. All implementations must align with the core mission of bridging digital AI to humanoid robotics through educational content.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+All development work must be traceable through Prompt History Records (PHRs) that capture every user input and corresponding implementation decisions. Significant architectural decisions must be documented in Architecture Decision Records (ADRs) when they meet the significance criteria (long-term consequences, multiple viable alternatives, cross-cutting influence).
+
+**Version**: 1.0.0 | **Ratified**: 2025-12-17 | **Last Amended**: 2025-12-17

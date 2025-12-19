@@ -1,0 +1,206 @@
+.vla-exercise {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 8px;
+  background-color: var(--ifm-background-surface-color);
+}
+
+.vla-exercise__header {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.vla-exercise__header h3 {
+  margin: 0 0 0.5rem 0;
+  color: var(--ifm-color-primary);
+}
+
+.vla-exercise__header p {
+  margin: 0;
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.9rem;
+}
+
+.vla-exercise__question h4 {
+  margin: 0 0 1.5rem 0;
+  color: var(--ifm-font-color-base);
+  line-height: 1.5;
+}
+
+.vla-exercise__options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.vla-exercise__option {
+  display: flex;
+  align-items: flex-start;
+  padding: 1rem;
+  border: 2px solid var(--ifm-color-emphasis-200);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: var(--ifm-background-color);
+}
+
+.vla-exercise__option:hover {
+  border-color: var(--ifm-color-primary);
+  background-color: var(--ifm-color-emphasis-100);
+}
+
+.vla-exercise__option--selected {
+  border-color: var(--ifm-color-primary);
+  background-color: var(--ifm-color-primary-lightest);
+}
+
+.vla-exercise__option--correct {
+  border-color: #28a745;
+  background-color: #f8fff9;
+}
+
+.vla-exercise__option--incorrect {
+  border-color: #dc3545;
+  background-color: #fff8f8;
+}
+
+.vla-exercise__option-radio {
+  margin-right: 0.75rem;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--ifm-color-emphasis-400);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.vla-exercise__option--selected .vla-exercise__option-radio {
+  border-color: var(--ifm-color-primary);
+  background-color: var(--ifm-color-primary);
+}
+
+.vla-exercise__option--correct .vla-exercise__option-radio {
+  border-color: #28a745;
+  background-color: #28a745;
+}
+
+.vla-exercise__option--incorrect .vla-exercise__option-radio {
+  border-color: #dc3545;
+  background-color: #dc3545;
+}
+
+.vla-exercise__radio-check {
+  color: white;
+  font-size: 0.75rem;
+  line-height: 1;
+}
+
+.vla-exercise__option-text {
+  flex: 1;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.vla-exercise__explanation {
+  margin: 1rem 0;
+  padding: 1rem;
+  background-color: var(--ifm-color-info-background);
+  border-left: 4px solid var(--ifm-color-info-darkest);
+  border-radius: 0 4px 4px 0;
+}
+
+.vla-exercise__explanation p {
+  margin: 0;
+  color: var(--ifm-color-info-contrast-foreground);
+  line-height: 1.5;
+}
+
+.vla-exercise__controls {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.vla-exercise__button {
+  padding: 0.5rem 1.25rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vla-exercise__button--primary {
+  background-color: var(--ifm-color-primary);
+  color: white;
+}
+
+.vla-exercise__button--primary:hover:not(:disabled) {
+  background-color: var(--ifm-color-primary-dark);
+}
+
+.vla-exercise__button--secondary {
+  background-color: var(--ifm-color-emphasis-200);
+  color: var(--ifm-font-color-base);
+}
+
+.vla-exercise__button--secondary:hover:not(:disabled) {
+  background-color: var(--ifm-color-emphasis-300);
+}
+
+.vla-exercise__button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.vla-exercise__results {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  text-align: center;
+  background-color: var(--ifm-color-success-lightest);
+  border: 1px solid var(--ifm-color-success-lighter);
+  border-radius: 8px;
+}
+
+.vla-exercise__results h4 {
+  margin: 0 0 0.5rem 0;
+  color: var(--ifm-color-success-dark);
+}
+
+.vla-exercise__results p {
+  margin: 0.5rem 0;
+}
+
+.vla-exercise__results-message {
+  font-style: italic;
+  color: var(--ifm-color-success-darker);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .vla-exercise {
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  .vla-exercise__controls {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .vla-exercise__button {
+    width: 100%;
+    max-width: 200px;
+  }
+}

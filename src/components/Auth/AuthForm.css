@@ -1,0 +1,94 @@
+/**
+ * CSS for Authentication Forms
+ * Follows WCAG 2.1 AA compliance guidelines
+ */
+
+.auth-form-card {
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 2rem;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.signup-form textarea[name="software_background"],
+.signup-form textarea[name="hardware_background"] {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.form-footer {
+  text-align: center;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.link-button {
+  background: none;
+  border: none;
+  color: var(--ifm-color-primary);
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+  font-size: inherit;
+}
+
+.link-button:hover,
+.link-button:focus {
+  color: var(--ifm-color-primary-dark);
+}
+
+.link-button:focus {
+  outline: 2px solid var(--ifm-color-focus);
+  outline-offset: 2px;
+}
+
+.general-error {
+  background-color: var(--ifm-color-danger-background);
+  color: var(--ifm-color-danger);
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  border: 1px solid var(--ifm-color-danger);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .auth-form-card {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+}
+
+/* Accessibility improvements */
+.auth-form:focus-within {
+  outline: 2px solid var(--ifm-color-focus);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .general-error {
+    border: 2px solid var(--ifm-color-danger);
+  }
+
+  .form-footer {
+    border-top: 2px solid var(--ifm-color-emphasis-500);
+  }
+}

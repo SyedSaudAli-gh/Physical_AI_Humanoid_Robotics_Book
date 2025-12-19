@@ -1,0 +1,249 @@
+openapi: 3.0.0
+info:
+  title: Content API
+  description: API for book content management and retrieval
+  version: 1.0.0
+servers:
+  - url: https://api.physical-ai-humanoid-book.com
+    description: Production server
+  - url: http://localhost:8000
+    description: Development server
+paths:
+  /content/{moduleId}/{chapterId}:
+    get:
+      summary: Get specific content
+      description: Retrieve book content by module and chapter ID
+      parameters:
+        - name: moduleId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Module identifier
+        - name: chapterId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Chapter identifier
+        - name: lang
+          in: query
+          schema:
+            type: string
+            default: en
+          description: Language code (en, ur)
+      responses:
+        '200':
+          description: Content retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Content'
+        '404':
+          description: Content not found
+  /content/search:
+    get:
+      summary: Search book content
+      description: Search across all book content
+      parameters:
+        - name: q
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Search query
+        - name: lang
+          in: query
+          schema:
+            type: string
+            default: en
+          description: Language code (en, ur)
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+          description: Maximum number of results
+        - name: moduleId
+          in: query
+          schema:
+            type: string
+          description: Filter by specific module
+      responses:
+        '200':
+          description: Search results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Content'
+                  total:
+                    type: integer
+                  query:
+                    type: string
+        '400':
+          description: Invalid query
+  /content/modules:
+    get:
+      summary: Get all modules
+      description: Retrieve list of all book modules
+      responses:
+        '200':
+          description: Modules list retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  modules:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Module'
+  /content/modules/{moduleId}:
+    get:
+      summary: Get specific module
+      description: Retrieve detailed information about a specific module
+      parameters:
+        - name: moduleId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Module identifier
+      responses:
+        '200':
+          description: Module retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Module'
+        '404':
+          description: Module not found
+  /content/progress:
+    get:
+      summary: Get user progress
+      description: Retrieve user's progress across all modules
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Progress retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  progress:
+                    type: object
+                    additionalProperties:
+                      type: object
+                      properties:
+                        moduleId:
+                          type: string
+                        completedChapters:
+                          type: integer
+                        totalChapters:
+                          type: integer
+                        completionPercentage:
+                          type: number
+        '401':
+          description: Unauthorized
+    post:
+      summary: Update content progress
+      description: Update user's progress for specific content
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - moduleId
+                - chapterId
+                - completed
+              properties:
+                moduleId:
+                  type: string
+                  description: Module identifier
+                chapterId:
+                  type: string
+                  description: Chapter identifier
+                completed:
+                  type: boolean
+                  description: Whether content was completed
+      responses:
+        '200':
+          description: Progress updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                  type: boolean
+        '401':
+          description: Unauthorized
+        '400':
+          description: Invalid input
+components:
+  schemas:
+    Content:
+      type: object
+      properties:
+        id:
+          type: string
+        moduleId:
+          type: string
+        chapterId:
+          type: string
+        title:
+          type: string
+        content:
+          type: string
+        urduContent:
+          type: string
+        type:
+          type: string
+          enum: [module, chapter, exercise, resource]
+        metadata:
+          type: object
+        order:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    Module:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        chapters:
+          type: array
+          items:
+            $ref: '#/components/schemas/Content'
+        order:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

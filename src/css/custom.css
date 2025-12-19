@@ -1,0 +1,214 @@
+/**
+ * Copyright (c) 2017-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/**
+ * Custom CSS for the Physical AI & Humanoid Robotics Book
+ */
+
+/* You can delete this file if you don't want custom CSS */
+
+/* Example custom styles */
+:root {
+  --ifm-color-primary: #25c2a0;
+  --ifm-color-primary-dark: rgb(33, 175, 144);
+  --ifm-color-primary-darker: rgb(31, 165, 136);
+  --ifm-color-primary-darkest: rgb(26, 136, 112);
+  --ifm-color-primary-light: rgb(70, 203, 174);
+  --ifm-color-primary-lighter: rgb(102, 212, 189);
+  --ifm-color-primary-lightest: rgb(146, 224, 208);
+  --ifm-code-font-size: 95%;
+
+  /* WCAG 2.1 AA compliance colors */
+  --ifm-color-warning: #856404; /* For warnings with better contrast */
+  --ifm-color-warning-background: #fff3cd;
+  --ifm-color-warning-border: #ffeaa7;
+
+  /* Focus indicator for keyboard navigation */
+  --ifm-color-focus: #005fcc; /* High contrast focus indicator */
+}
+
+.docusaurus-highlight-code-line {
+  background-color: rgba(0, 0, 0, 0.1);
+  display: block;
+  margin: 0 calc(-1 * var(--ifm-pre-padding));
+  padding: 0 var(--ifm-pre-padding);
+}
+
+html[data-theme='dark'] .docusaurus-highlight-code-line {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* WCAG 2.1 AA compliance: Focus indicators */
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus,
+[tabindex]:focus {
+  outline: 2px solid var(--ifm-color-focus);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* WCAG 2.1 AA compliance: Remove focus indicators only when not needed */
+a:not(:focus),
+button:not(:focus),
+input:not(:focus),
+select:not(:focus),
+textarea:not(:focus),
+[tabindex]:not(:focus) {
+  outline: none;
+}
+
+/* Custom styles for RAG chatbot component */
+.rag-chatbot-container {
+  border: 1px solid var(--ifm-color-primary-light);
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem 0;
+  background-color: var(--ifm-color-emphasis-100);
+}
+
+/* Custom styles for VLA exercises */
+.vla-exercise-container {
+  border: 1px solid var(--ifm-color-primary);
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem 0;
+  background-color: var(--ifm-color-emphasis-100);
+}
+
+/* Custom styles for Mermaid diagrams */
+.mermaid {
+  text-align: center;
+  margin: 1rem 0;
+}
+
+/* Custom admonition styles */
+.admonition {
+  margin: 1rem 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
+
+  /* Mobile-friendly navigation */
+  .navbar__items {
+    flex-wrap: wrap;
+  }
+
+  /* Responsive form elements */
+  .auth-form {
+    width: 100%;
+    max-width: 100%;
+    padding: 1rem;
+  }
+
+  /* Responsive language switcher */
+  .language-switcher {
+    margin-left: 0.5rem;
+  }
+}
+
+/* Accessibility improvements */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --ifm-color-primary: #005fcc;
+    --ifm-color-primary-dark: #003d99;
+    --ifm-color-primary-light: #66b3ff;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Better contrast for text */
+[data-theme='light'] {
+  --ifm-color-content: #1a1a1a; /* Darker text for better contrast */
+}
+
+[data-theme='dark'] {
+  --ifm-color-content: #e6e6e6; /* Lighter text for dark mode */
+}
+
+/* Custom button styles with better accessibility */
+.button--primary {
+  border: 2px solid transparent;
+}
+
+.button--primary:focus {
+  border-color: var(--ifm-color-focus);
+  box-shadow: 0 0 0 2px var(--ifm-color-emphasis-200), 0 0 0 4px var(--ifm-color-focus);
+}
+
+/* Custom form elements with WCAG compliance */
+.form-control {
+  padding: 0.5rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.form-control:focus {
+  border-color: var(--ifm-color-focus);
+  box-shadow: 0 0 0 2px var(--ifm-color-focus);
+}
+
+/* Loading spinner for accessibility */
+.loading-spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top-color: var(--ifm-color-primary);
+  animation: spin 1s ease-in-out infinite;
+  margin-right: 0.5rem;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Skip link for keyboard navigation */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: var(--ifm-color-focus);
+  color: white;
+  padding: 8px;
+  text-decoration: none;
+  border-radius: 4px;
+  z-index: 1000;
+}
+
+.skip-link:focus {
+  top: 6px;
+}

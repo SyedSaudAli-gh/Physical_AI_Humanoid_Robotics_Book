@@ -1,0 +1,127 @@
+/**
+ * Custom CSS for Hero component
+ * Follows WCAG 2.1 AA compliance guidelines
+ */
+
+.hero-banner {
+  padding: 4rem 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--ifm-color-primary-lightest) 0%, var(--ifm-color-primary-lighter) 100%);
+}
+
+[data-theme='dark'] .hero-banner {
+  background: linear-gradient(135deg, var(--ifm-color-primary-darkest) 0%, var(--ifm-color-primary-darker) 100%);
+}
+
+.hero__image-container {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.hero__image {
+  max-width: 100%;
+  height: auto;
+  max-height: 300px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.hero__title {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: var(--ifm-color-content);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.hero__subtitle {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  color: var(--ifm-color-content);
+  font-weight: 500;
+}
+
+.hero__content {
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  font-size: 1.2rem;
+  color: var(--ifm-color-content);
+  line-height: 1.6;
+}
+
+.hero__buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.hero-button {
+  margin: 0.5rem;
+  min-width: 180px;
+}
+
+.hero-button--outline {
+  background: transparent;
+  border: 2px solid var(--ifm-color-primary);
+  color: var(--ifm-color-primary);
+}
+
+.hero-button--outline:hover {
+  background: var(--ifm-color-primary);
+  color: white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hero-banner {
+    padding: 2rem 0;
+  }
+
+  .hero__image-container {
+    margin-bottom: 1rem;
+  }
+
+  .hero__image {
+    max-height: 200px;
+  }
+
+  .hero__title {
+    font-size: 2rem;
+  }
+
+  .hero__subtitle {
+    font-size: 1.25rem;
+  }
+
+  .hero__content {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+
+  .hero__buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-button {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+/* Accessibility improvements */
+.hero-banner:focus-within {
+  outline: 2px solid var(--ifm-color-focus);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .hero-banner {
+    border: 2px solid var(--ifm-color-emphasis-900);
+  }
+}
